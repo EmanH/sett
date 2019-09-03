@@ -69,7 +69,7 @@ func (s *Sett) Get(key string) (string, error) {
 		if err != nil {
 			return err
 		}
-		val, err = item.Value()
+		val, err = item.ValueCopy(nil)
 		if err != nil {
 			return err
 		}
@@ -148,7 +148,7 @@ func (s *Sett) Scan(filter ...string) (map[string]string, error) {
 			item := it.Item()
 			k := string(item.Key())
 			k = strings.TrimLeft(k, s.table)
-			v, _ := item.Value()
+			v, _ := item.ValueCopy(nil)
 			result[k] = string(v)
 		}
 		return err
